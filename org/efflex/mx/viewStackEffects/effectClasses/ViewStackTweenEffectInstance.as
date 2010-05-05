@@ -380,7 +380,7 @@ package org.efflex.mx.viewStackEffects.effectClasses
 				_wasInterrupted = _contentPane.wasInterrupted = true;
 			}
 			
-			_contentPane.containerResizeAndCreator.cancel();
+			if( _contentPane && _contentPane.containerResizeAndCreator ) _contentPane.containerResizeAndCreator.cancel();
 
 			stopRepeat = true;
 			if( delayTimer ) delayTimer.reset();
@@ -442,10 +442,12 @@ package org.efflex.mx.viewStackEffects.effectClasses
 		
 		protected function removeChildren():void
 		{
-			var numChildren:int  = display.numChildren;
-			for( var i:int = numChildren - 1; i > -1; i-- )
-			{
-				display.removeChild( DisplayObject( display.getChildAt( i ) ) );
+			if (display) {
+				var numChildren:int  = display.numChildren;
+				for( var i:int = numChildren - 1; i > -1; i-- )
+				{
+					display.removeChild( DisplayObject( display.getChildAt( i ) ) );
+				}
 			}
 		}
 		
